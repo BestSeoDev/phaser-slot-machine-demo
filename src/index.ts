@@ -9,19 +9,38 @@ export default class Game {
 
   resize() {
     const canvas = document.querySelector('canvas')!;
-
+    
+    // Target mobile dimensions
+    const targetWidth = 1280;
+    const targetHeight = 720;
+    
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
-    const windowRatio = windowWidth / windowHeight;
-    const gameRatio = config.width / config.height;
-
-    if (windowRatio < gameRatio) {
-      canvas.style.width = windowWidth + 'px';
-      canvas.style.height = windowWidth / gameRatio + 'px';
-    } else {
-      canvas.style.width = windowHeight * gameRatio + 'px';
-      canvas.style.height = windowHeight + 'px';
-    }
+    
+    // Calculate scale to fill the screen completely
+    const scaleX = windowWidth / targetWidth;
+    const scaleY = windowHeight / targetHeight;
+    const scale = Math.max(scaleX, scaleY);
+    
+    // Apply the scaling
+    const newWidth = targetWidth * scale;
+    const newHeight = targetHeight * scale;
+    
+    // Center the canvas
+    const left = (windowWidth - newWidth) / 2;
+    const top = (windowHeight - newHeight) / 2;
+    
+    // Apply styles
+    canvas.style.width = newWidth + 'px';
+    canvas.style.height = newHeight + 'px';
+    canvas.style.position = 'absolute';
+    canvas.style.left = left + 'px';
+    canvas.style.top = top + 'px';
+    
+    // Optional: remove any margin/padding to ensure full coverage
+    document.body.style.margin = '0';
+    document.body.style.padding = '0';
+    document.body.style.overflow = 'hidden';
   }
 }
 
