@@ -5,8 +5,8 @@ import { Boot, Game, Preload } from './scenes';
 type Config = Phaser.Types.Core.GameConfig & { width: number; height: number };
 
 const config: Config = {
-  width: 390,
-  height: 219,
+  width: 1280,
+  height: 720,
   physics: {
     default: 'arcade',
     arcade: {
