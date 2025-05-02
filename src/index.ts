@@ -9,35 +9,16 @@ export default class Game {
 
   resize() {
     const canvas = document.querySelector('canvas')!;
-    
-    // Target mobile dimensions
-    const targetWidth = 1280;
-    const targetHeight = 720;
-    
+
+    // Get window dimensions
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     
-    // Calculate scale to fill the screen completely
-    const scaleX = windowWidth / targetWidth;
-    const scaleY = windowHeight / targetHeight;
-    const scale = Math.max(scaleX, scaleY);
+    // Force canvas to take full width and height of the screen
+    canvas.style.width = windowWidth + 'px';
+    canvas.style.height = windowHeight + 'px';
     
-    // Apply the scaling
-    const newWidth = targetWidth * scale;
-    const newHeight = targetHeight * scale;
-    
-    // Center the canvas
-    const left = (windowWidth - newWidth) / 2;
-    const top = (windowHeight - newHeight) / 2;
-    
-    // Apply styles
-    canvas.style.width = newWidth + 'px';
-    canvas.style.height = newHeight + 'px';
-    canvas.style.position = 'absolute';
-    canvas.style.left = left + 'px';
-    canvas.style.top = top + 'px';
-    
-    // Optional: remove any margin/padding to ensure full coverage
+    // Remove any margins/padding that might be causing gaps
     document.body.style.margin = '0';
     document.body.style.padding = '0';
     document.body.style.overflow = 'hidden';
